@@ -1,5 +1,6 @@
-"./Src/main.o"
+"./Src/0008spi_cmd_handling.o"
 "./Src/syscalls.o"
 "./Src/sysmem.o"
 "./Startup/startup_stm32f401retx.o"
 "./drivers/Src/stm32f401xx_gpio_drivers.o"
+"./drivers/Src/stm32f401xx_spi_driver.o"
