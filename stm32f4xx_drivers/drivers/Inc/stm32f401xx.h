@@ -100,6 +100,35 @@
 #define USART1_BASEADD	                                (APB2PERIPH_BASE + 0x1000)
 #define USART6_BASEADD                                  (APB2PERIPH_BASE + 0x1400)
 
+
+
+/*
+ *  Peripheral definitions
+ */
+
+#define GPIOA                                              ((GPIO_RegDef_t *) GPIOA_BASEADDR)
+#define GPIOB                                              ((GPIO_RegDef_t *) GPIOB_BASEADDR)
+#define GPIOC                                              ((GPIO_RegDef_t *) GPIOC_BASEADDR)
+#define GPIOD                                              ((GPIO_RegDef_t *) GPIOD_BASEADDR)
+#define GPIOE                                              ((GPIO_RegDef_t *) GPIOE_BASEADDR)
+#define GPIOH                                              ((GPIO_RegDef_t *) GPIOH_BASEADDR)
+
+#define RCC                                                ((RCC_RegDef_t *) RCC_BASEADDR)
+
+#define EXTI                                               ((EXTI_RegDef_t *) EXTI_BASEADDR)
+
+#define SYSCFG                                             ((SYSCFG_RegDef_t *) SYSCFG_BASEADDR)
+
+#define SPI1                                               ((SPI_RegDef_t *)SPI1_BASEADDR)
+#define SPI2                                               ((SPI_RegDef_t *)SPI2_BASEADDR)
+#define SPI3                                               ((SPI_RegDef_t *)SPI3_BASEADDR)
+
+
+#define I2C1                                               ((I2C_RegDef_t *)I2C1_BASEADDR)
+#define I2C2                                               ((I2C_RegDef_t *)I2C2_BASEADDR)
+#define I2C3                                               ((I2C_RegDef_t *)I2C3_BASEADDR)
+
+
 /*
  * Registor of a perioheral are sprecific  to MCU
  *
@@ -170,28 +199,6 @@ typedef struct
 
 }SPI_RegDef_t;
 
-/*
- *  Peripheral definitions
- */
-
-#define GPIOA                                              ((GPIO_RegDef_t *) GPIOA_BASEADDR)
-#define GPIOB                                              ((GPIO_RegDef_t *) GPIOB_BASEADDR)
-#define GPIOC                                              ((GPIO_RegDef_t *) GPIOC_BASEADDR)
-#define GPIOD                                              ((GPIO_RegDef_t *) GPIOD_BASEADDR)
-#define GPIOE                                              ((GPIO_RegDef_t *) GPIOE_BASEADDR)
-#define GPIOH                                              ((GPIO_RegDef_t *) GPIOH_BASEADDR)
-
-#define RCC                                                ((RCC_RegDef_t *) RCC_BASEADDR)
-
-#define EXTI                                               ((EXTI_RegDef_t *) EXTI_BASEADDR)
-
-#define SYSCFG                                             ((SYSCFG_RegDef_t *) SYSCFG_BASEADDR)
-
-#define SPI1                                               ((SPI_RegDef_t *)SPI1_BASEADDR)
-#define SPI2                                               ((SPI_RegDef_t *)SPI2_BASEADDR)
-#define SPI3                                               ((SPI_RegDef_t *)SPI3_BASEADDR)
-
-
 /**
   * @brief Reset and Clock Control
   */
@@ -233,6 +240,25 @@ typedef struct
   _vo uint32_t DCKCFGR2;      /*!< RCC Dedicated Clocks configuration register 2,               Address offset: 0x94 */ /* Only for STM32F410xx, STM32F412xG, STM32413_423xx and STM32F446xx devices */
 
 } RCC_RegDef_t;
+
+
+/*
+ * Peripheral register definitiion structure for I2C
+ */
+typedef struct
+{
+	_vo uint32_t CR1;          /*!<TODO,            Address            >*/
+	_vo uint32_t CR2;          /*!<TODO,            Address            >*/
+	_vo uint32_t OAR1;         /*!<TODO,            Address            >*/
+	_vo uint32_t OAR2;         /*!<TODO,            Address            >*/
+	_vo uint32_t DR;           /*!<TODO,            Address            >*/
+	_vo uint32_t SR1;          /*!<TODO,            Address            >*/
+	_vo uint32_t SR2;          /*!<TODO,            Address            >*/
+	_vo uint32_t CCR;          /*!<TODO,            Address            >*/
+	_vo uint32_t TRISE;        /*!<TODO,            Address            >*/
+	_vo uint32_t FLTR;         /*!<TODO,            Address            >*/
+}I2C_RegDef_t;
+
 
 /*
  * Clock Enable Marcos for GPIOx peripherals
@@ -431,5 +457,67 @@ typedef struct
 #define SPI_SR_OVR           6
 #define SPI_SR_BUSY          7
 #define SPI_SR_FRE           8
+
+
+/********************** Bit position definitions of I2C peripheral ***************************
+ *********************************************************************************************/
+
+/*
+ * Bit position definitions of I2C_CR1 register
+ */
+#define I2C_CR1_PE                  0
+#define I2C_CR1_NOSTRETCH           7
+#define I2C_CR1_START               8
+#define I2C_CR1_STOP                9
+#define I2C_CR1_ACK                 10
+#define I2C_CR1_SWRST               15
+
+/*
+ * Bit position definitions of I2C_CR2 register
+ */
+#define I2C_CR2_FREQ                 0
+#define I2C_CR2_ITERREN              8
+#define I2C_CR2_ITEVTEN              9
+#define I2C_CR2_ITBUFEN              10
+
+/*
+ * Bit position definitions of I2C_OAR1 register
+ */
+#define I2C_OAR1_ADD0                 0
+#define I2C_OAR1_ADD71                1
+#define I2C_OAR1_ADD98                8
+#define I2C_OAR1_ADDMODE              15
+
+/*
+ * Bit position definitions of I2C_SR1 register
+ */
+#define I2C_SR1_SB                    1
+#define I2C_SR1_ADDR                  2
+#define I2C_SR1_BTF                   3
+#define I2C_SR1_ADD10                 4
+#define I2C_SR1_STOPF                 6
+#define I2C_SR1_RXNE                  7
+#define I2C_SR1_TXE	                  8
+#define I2C_SR1_RERR                  9
+#define I2C_SR1_ARLO                  10
+#define I2C_SR1_AF                    11
+#define I2C_SR1_OVR                   12
+#define I2C_SR1_TIMEOUT               14
+
+/*
+ * Bit position definitions of I2C_SR2 register
+ */
+#define I2C_SR2_MSL                    0
+#define I2C_SR2_BUSY                   1
+#define I2C_SR2_TRA                    2
+#define I2C_SR2_GENCALL                4
+#define I2C_SR2_DUALF                  7
+
+/*
+ * Bit position definitions of I2C_CCR register
+ */
+#define I2C_CCR_CCR                    0
+#define I2C_CCR_DUTY                   14
+#define I2C_CCR_FS                     15
 
 #endif /* INC_STM32F401XX_H_ */
