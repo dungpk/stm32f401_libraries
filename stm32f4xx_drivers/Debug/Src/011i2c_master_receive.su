@@ -1,0 +1,5 @@
+../Src/011i2c_master_receive.c:29:5:main	24	static
+../Src/011i2c_master_receive.c:65:6:delay	16	static
+../Src/011i2c_master_receive.c:74:6:I2C1_GPIOInit	24	static
+../Src/011i2c_master_receive.c:95:6:I2C1_Init	8	static
+../Src/011i2c_master_receive.c:109:6:GPIO_ButtonInit	24	static

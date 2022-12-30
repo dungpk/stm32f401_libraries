@@ -422,7 +422,44 @@ void SPI_SSOEConfig(SPI_RegDef_t *pSPIx,uint8_t EnOrDi)
  * @Note         - None
  *
  */
-void SPI_IRQIneruptConfig(uint8_t IRQNumber, uint8_t EnOrDi);
+void SPI_IRQIneruptConfig(uint8_t IRQNumber, uint8_t EnOrDi)
+{
+	if(EnOrDi == ENABLE)
+	{
+		if(IRQNumber <= 31)
+		{
+			//program ISER0 register
+			*NVIC_ISER0 |= (1 << IRQNumber);
+
+		}else if(IRQNumber > 31 && IRQNumber <64 ) // 32 to 63
+		{
+			//program ISE1 register
+			*NVIC_ISER1 |= (1 << (IRQNumber % 32));
+
+		}else if(IRQNumber >= 64 && IRQNumber < 96) //64 to 95
+		{
+			//program ISE2 register
+			*NVIC_ISER3 |= (1 << (IRQNumber % 64));
+		}
+	}else
+	{
+		if(IRQNumber <= 31)
+				{
+					//program ICER0 register
+					*NVIC_ICER0 |= (1 << IRQNumber);
+
+				}else if(IRQNumber > 31 && IRQNumber <64 ) // 32 to 63
+				{
+					//program ISE1 register
+					*NVIC_ICER1 |= (1 << (IRQNumber % 32));
+
+				}else if(IRQNumber >= 64 && IRQNumber < 96) //64 to 95
+				{
+					//program ISE2 register
+					*NVIC_ICER3 |= (1 << (IRQNumber % 64));
+				}
+	}
+}
 
 /**********************************************************************************
  * @fn           - SPI_IRQPriorityConfig
@@ -438,7 +475,14 @@ void SPI_IRQIneruptConfig(uint8_t IRQNumber, uint8_t EnOrDi);
  * @Note         - None
  *
  */
-void SPI_IRQPriorityConfig(uint8_t IRQNumber,uint8_t IRQPriority);
+void SPI_IRQPriorityConfig(uint8_t IRQNumber,uint8_t IRQPriority)
+{
+	// firsts lets find out the ipr register
+	uint8_t iprx = IRQNumber / 4;
+	uint8_t iprx_section = IRQNumber % 4;
+	uint8_t shift_amount = (8 * iprx_section) + (8 - NO_PR_BITS_IMPLEMENTED);
+	*(NVIC_PR_BASE_ADDR + iprx) |= ( IRQPriority << shift_amount );
+}
 
 /**********************************************************************************
  * @fn           - SPI_IRQHandling
