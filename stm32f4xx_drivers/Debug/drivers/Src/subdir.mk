@@ -7,17 +7,23 @@
 C_SRCS += \
 ../drivers/Src/smt32f401xx_i2c_driver.c \
 ../drivers/Src/stm32f401xx_gpio_drivers.c \
-../drivers/Src/stm32f401xx_spi_driver.c 
+../drivers/Src/stm32f401xx_rcc_driver.c \
+../drivers/Src/stm32f401xx_spi_driver.c \
+../drivers/Src/stm32f401xx_usart_drivers.c 
 
 OBJS += \
 ./drivers/Src/smt32f401xx_i2c_driver.o \
 ./drivers/Src/stm32f401xx_gpio_drivers.o \
-./drivers/Src/stm32f401xx_spi_driver.o 
+./drivers/Src/stm32f401xx_rcc_driver.o \
+./drivers/Src/stm32f401xx_spi_driver.o \
+./drivers/Src/stm32f401xx_usart_drivers.o 
 
 C_DEPS += \
 ./drivers/Src/smt32f401xx_i2c_driver.d \
 ./drivers/Src/stm32f401xx_gpio_drivers.d \
-./drivers/Src/stm32f401xx_spi_driver.d 
+./drivers/Src/stm32f401xx_rcc_driver.d \
+./drivers/Src/stm32f401xx_spi_driver.d \
+./drivers/Src/stm32f401xx_usart_drivers.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -27,7 +33,7 @@ drivers/Src/%.o drivers/Src/%.su: ../drivers/Src/%.c drivers/Src/subdir.mk
 clean: clean-drivers-2f-Src
 
 clean-drivers-2f-Src:
-	-$(RM) ./drivers/Src/smt32f401xx_i2c_driver.d ./drivers/Src/smt32f401xx_i2c_driver.o ./drivers/Src/smt32f401xx_i2c_driver.su ./drivers/Src/stm32f401xx_gpio_drivers.d ./drivers/Src/stm32f401xx_gpio_drivers.o ./drivers/Src/stm32f401xx_gpio_drivers.su ./drivers/Src/stm32f401xx_spi_driver.d ./drivers/Src/stm32f401xx_spi_driver.o ./drivers/Src/stm32f401xx_spi_driver.su
+	-$(RM) ./drivers/Src/smt32f401xx_i2c_driver.d ./drivers/Src/smt32f401xx_i2c_driver.o ./drivers/Src/smt32f401xx_i2c_driver.su ./drivers/Src/stm32f401xx_gpio_drivers.d ./drivers/Src/stm32f401xx_gpio_drivers.o ./drivers/Src/stm32f401xx_gpio_drivers.su ./drivers/Src/stm32f401xx_rcc_driver.d ./drivers/Src/stm32f401xx_rcc_driver.o ./drivers/Src/stm32f401xx_rcc_driver.su ./drivers/Src/stm32f401xx_spi_driver.d ./drivers/Src/stm32f401xx_spi_driver.o ./drivers/Src/stm32f401xx_spi_driver.su ./drivers/Src/stm32f401xx_usart_drivers.d ./drivers/Src/stm32f401xx_usart_drivers.o ./drivers/Src/stm32f401xx_usart_drivers.su
 
 .PHONY: clean-drivers-2f-Src
 
